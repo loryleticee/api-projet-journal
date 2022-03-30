@@ -18,11 +18,11 @@ class CurrentUserData implements QueryCollectionExtensionInterface {
     public function applyToCollection(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, string $operationName = null)
     {
        
-        // if ($resourceClass == Article::class) {
-        //     if(in_array("ROLE_ADMIN", $this->security->getUser()->getRoles()) === false) {
-        //         $aliasTable = $queryBuilder->getRootAliases()[0];
-        //         $queryBuilder->andWhere("$aliasTable.author = :authenticated_user")->setParameter("authenticated_user", $this->security->getUser()->getId());
-        //     }
-        // }
+        if ($resourceClass == Article::class) {
+            if(in_array("ROLE_ADMIN", $this->security->getUser()->getRoles()) === false) {
+                $aliasTable = $queryBuilder->getRootAliases()[0];
+                $queryBuilder->andWhere("$aliasTable.author = :authenticated_user")->setParameter("authenticated_user", $this->security->getUser()->getId());
+            }
+        }
     }
 }
